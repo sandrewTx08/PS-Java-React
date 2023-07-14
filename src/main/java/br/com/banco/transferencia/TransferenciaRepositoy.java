@@ -4,23 +4,19 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransferenciaRepositoy extends PagingAndSortingRepository<Transferencia, Integer> {
+        @Query("SELECT t FROM Transferencia t WHERE t.conta.id = ?1" +
+                        " AND (?2 IS NULL OR t.nomeOperadorTransacao = ?2)" +
+                        " AND ((t.dataTransferencia BETWEEN ?3 AND ?4) OR ((CAST(?3 AS timestamp) IS NULL) OR (CAST(?4 AS timestamp) IS NULL)))")
         public Page<Transferencia> findAllTransferenciaByContaId(
-                        Pageable pageable,
-                        Integer contaId);
+                        Integer contaId, String nomeOperadorTransacao,
+                        LocalDateTime dataInicio, LocalDateTime dataFim, Pageable pageable);
 
-        public Page<Transferencia> findAllTransferenciaByContaIdAndNomeOperadorTransacao(
-                        Pageable pageable, Integer contaId, String nomeOperadorTransacao);
-
-        public Page<Transferencia> findAllTransferenciaByContaIdAndDataTransferenciaBetween(
-                        Pageable pageable, Integer contaId,
-                        LocalDateTime data_inicio, LocalDateTime data_fim);
-
-        public Page<Transferencia> findAllTransferenciaByContaIdAndNomeOperadorTransacaoAndDataTransferenciaBetween(
-                        Pageable pageable, Integer contaId, String nomeOperadorTransacao,
-                        LocalDateTime data_inicio, LocalDateTime data_fim);
+        @Query("SELECT SUM(t.valor) FROM Transferencia t WHERE t.conta.id = ?1")
+        public Long saldoTotalByContaId(Integer contaId);
 }

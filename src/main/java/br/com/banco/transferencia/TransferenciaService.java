@@ -13,36 +13,27 @@ public class TransferenciaService {
 
         public Page<Transferencia> findAllTransferenciaByContaId(Pageable pageable, Integer conta_id,
                         String nome_operador_transacao, String data_inicio, String data_fim) {
-                Page<Transferencia> transferencia;
-
                 LocalDateTime d_inicio = data_inicio != null ? LocalDateTime.parse(data_inicio)
-                                : LocalDateTime.of(1990, 1, 1, 0, 0, 0, 0);
-                LocalDateTime d_fim = data_fim != null ? LocalDateTime.parse(data_fim) : LocalDateTime.now();
+                                : null;
+                LocalDateTime d_fim = data_fim != null ? LocalDateTime.parse(data_fim) : null;
 
-                if (conta_id != null) {
-                        if (data_inicio != null && data_fim != null && nome_operador_transacao == null) {
-                                transferencia = transferenciaRepositoy
-                                                .findAllTransferenciaByContaIdAndDataTransferenciaBetween(pageable,
-                                                                conta_id, d_inicio, d_fim);
-                        } else if (nome_operador_transacao != null) {
-                                transferencia = transferenciaRepositoy
-                                                .findAllTransferenciaByContaIdAndNomeOperadorTransacao(pageable,
-                                                                conta_id,
-                                                                nome_operador_transacao);
-                        } else {
-                                transferencia = transferenciaRepositoy.findAll(pageable);
-                        }
-                } else {
-                        transferencia = transferenciaRepositoy
-                                        .findAllTransferenciaByNomeOperadorTransacaoAndDataTransferenciaBetween(
-                                                        pageable, nome_operador_transacao, d_inicio,
+                if (data_inicio != null && data_fim != null && nome_operador_transacao == null) {
+                        return transferenciaRepositoy
+                                        .findAllTransferenciaByContaIdAndDataTransferenciaBetween(pageable,
+                                                        conta_id, d_inicio, d_fim);
+                } else if (nome_operador_transacao != null && data_fim != null
+                                && data_inicio != null) {
+                        return transferenciaRepositoy
+                                        .findAllTransferenciaByContaIdAndNomeOperadorTransacaoAndDataTransferenciaBetween(
+                                                        pageable, conta_id, nome_operador_transacao, d_inicio,
                                                         d_fim);
+                } else if (nome_operador_transacao != null) {
+                        return transferenciaRepositoy
+                                        .findAllTransferenciaByContaIdAndNomeOperadorTransacao(pageable,
+                                                        conta_id,
+                                                        nome_operador_transacao);
+                } else {
+                        return transferenciaRepositoy.findAllTransferenciaByContaId(pageable, conta_id);
                 }
-
-                return transferencia;
-        }
-
-        public Page<Transferencia> findAllTransferencia(Pageable pageable) {
-                return transferenciaRepositoy.findAll(pageable);
         }
 }

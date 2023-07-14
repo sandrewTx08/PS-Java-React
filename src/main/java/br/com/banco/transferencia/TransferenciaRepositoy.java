@@ -20,7 +20,7 @@ public interface TransferenciaRepositoy extends PagingAndSortingRepository<Trans
                         Pageable pageable, Integer contaId,
                         LocalDateTime data_inicio, LocalDateTime data_fim);
 
-        public Page<Transferencia> findAllTransferenciaByNomeOperadorTransacaoAndDataTransferenciaBetween(
-                        Pageable pageable, String nomeOperadorTransacao,
+        public Page<Transferencia> findAllTransferenciaByContaIdAndNomeOperadorTransacaoAndDataTransferenciaBetween(
+                        Pageable pageable, Integer contaId, String nomeOperadorTransacao,
                         LocalDateTime data_inicio, LocalDateTime data_fim);
 }

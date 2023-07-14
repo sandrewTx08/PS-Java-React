@@ -16,12 +16,6 @@ public class TransferenciaController {
     @Autowired
     private TransferenciaService transferenciaService;
 
-    @GetMapping
-    public List<Transferencia> findAllTransferencia(Pageable pageable) {
-        return transferenciaService.findAllTransferencia(pageable)
-                .getContent();
-    }
-
     @GetMapping("{conta_id}")
     public List<Transferencia> findAllTransferenciaByContaId(
             Pageable pageable,

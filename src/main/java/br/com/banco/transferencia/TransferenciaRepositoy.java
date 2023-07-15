@@ -19,4 +19,7 @@ public interface TransferenciaRepositoy extends PagingAndSortingRepository<Trans
 
         @Query("SELECT SUM(t.valor) FROM Transferencia t WHERE t.conta.id = ?1")
         public Long saldoTotalByContaId(Integer contaId);
+
+        @Query("SELECT SUM(t.valor) FROM Transferencia t WHERE t.conta.id = ?1 AND ((t.dataTransferencia BETWEEN ?2 AND ?3) OR ((CAST(?2 AS timestamp) IS NULL) OR (CAST(?3 AS timestamp) IS NULL)))")
+        public Long saldoTotalByContaIdAndPeriodo(Integer contaId, LocalDateTime dataInicio, LocalDateTime dataFim);
 }

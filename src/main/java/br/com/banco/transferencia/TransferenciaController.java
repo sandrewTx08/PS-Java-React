@@ -15,7 +15,7 @@ public class TransferenciaController {
         @Autowired
         private TransferenciaService transferenciaService;
 
-        @GetMapping("{conta_id}")
+        @GetMapping("{contaId}")
         public TransferenciaDTO findAllTransferenciaByContaId(
                         Pageable pageable,
                         @RequestParam(name = "dataInicio", required = false) String dataInicio,

@@ -6,6 +6,8 @@ env:
   POSTGRES_PORT: 5432
   DDL_AUTO: update
   DATABASE_URL: "jdbc:postgresql://postgres:postgres@localhost:5432/postgres"
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_USER: postgres
 
 jobs:
   container-job:

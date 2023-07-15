@@ -11,8 +11,8 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class TransferenciaDTO {
-    public Integer totalDePaginas;
-    public BigDecimal saldoTotal;
-    public BigDecimal saldoTotalDoPeriodo;
-    public List<Transferencia> transferencias;
+    private Integer totalDePaginas;
+    private BigDecimal saldoTotal;
+    private BigDecimal saldoTotalDoPeriodo;
+    private List<Transferencia> transferencias;
 }

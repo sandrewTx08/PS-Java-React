@@ -17,7 +17,7 @@ public class TransferenciaService {
 
                 return transferenciaRepositoy
                                 .findAllTransferenciaByContaId(
-                                                contaId, nomeOperadorTransacao,
+                                                contaId, nomeOperadorTransacao != "" ? nomeOperadorTransacao : null,
                                                 temPeriodo ? LocalDateTime.parse(dataInicio) : null,
                                                 temPeriodo ? LocalDateTime.parse(dataFim) : null,
                                                 pageable);

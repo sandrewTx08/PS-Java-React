@@ -1,5 +1,6 @@
 package br.com.banco.transferencia;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,11 +24,11 @@ public class TransferenciaService {
                                                 pageable);
         }
 
-        public Long saldoTotalByContaId(Integer contaId) {
+        public BigDecimal saldoTotalByContaId(Integer contaId) {
                 return transferenciaRepositoy.saldoTotalByContaId(contaId);
         }
 
-        public Long saldoTotalByContaIdAndPeriodo(Integer contaId, String dataInicio, String dataFim) {
+        public BigDecimal saldoTotalByContaIdAndPeriodo(Integer contaId, String dataInicio, String dataFim) {
                 boolean temPeriodo = dataInicio != null && dataFim != null;
 
                 return transferenciaRepositoy.saldoTotalByContaIdAndPeriodo(contaId,

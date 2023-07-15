@@ -29,7 +29,7 @@ public class TransferenciaController {
                 return new TransferenciaDTO(
                                 transferencia.getTotalPages(),
                                 transferenciaService.saldoTotalByContaId(contaId),
-                                transferenciaService.saldoTotalByContaIdAndPeriodo(contaId, dataInicio, dataInicio),
+                                transferenciaService.saldoTotalByContaIdAndPeriodo(contaId, dataInicio, dataFim),
                                 transferencia.getContent());
         }
 }

@@ -1,5 +1,6 @@
 package br.com.banco.transferencia;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
@@ -18,8 +19,9 @@ public interface TransferenciaRepositoy extends PagingAndSortingRepository<Trans
                         LocalDateTime dataInicio, LocalDateTime dataFim, Pageable pageable);
 
         @Query("SELECT SUM(t.valor) FROM Transferencia t WHERE t.conta.id = ?1")
-        public Long saldoTotalByContaId(Integer contaId);
+        public BigDecimal saldoTotalByContaId(Integer contaId);
 
         @Query("SELECT SUM(t.valor) FROM Transferencia t WHERE t.conta.id = ?1 AND ((t.dataTransferencia BETWEEN ?2 AND ?3) OR ((CAST(?2 AS timestamp) IS NULL) OR (CAST(?3 AS timestamp) IS NULL)))")
-        public Long saldoTotalByContaIdAndPeriodo(Integer contaId, LocalDateTime dataInicio, LocalDateTime dataFim);
+        public BigDecimal saldoTotalByContaIdAndPeriodo(Integer contaId, LocalDateTime dataInicio,
+                        LocalDateTime dataFim);
 }

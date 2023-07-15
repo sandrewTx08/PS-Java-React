@@ -1,5 +1,6 @@
 package br.com.banco.transferencia;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class TransferenciaDTO {
     public Integer totalDePaginas;
-    public Long saldoTotal;
-    public Long saldoTotalDoPeriodo;
+    public BigDecimal saldoTotal;
+    public BigDecimal saldoTotalDoPeriodo;
     public List<Transferencia> transferencias;
 }

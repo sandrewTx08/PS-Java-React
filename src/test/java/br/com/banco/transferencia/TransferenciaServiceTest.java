@@ -2,6 +2,7 @@ package br.com.banco.transferencia;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -69,5 +70,13 @@ public class TransferenciaServiceTest {
 
         assertEquals(1, transferencias.size());
         assertEquals("2019-08-07T02:12:45", transferencias.get(0).getDataTransferencia().toString());
+    }
+
+    @Test
+    public void saldoTotalByContaId() {
+        BigDecimal transferencias = transferenciaService
+                .saldoTotalByContaId(1);
+
+        assertEquals(BigDecimal.valueOf(30895.46 - 500.50 + 3241.23), transferencias);
     }
 }

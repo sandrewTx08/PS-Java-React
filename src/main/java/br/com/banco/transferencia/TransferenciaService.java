@@ -11,15 +11,15 @@ public class TransferenciaService {
         @Autowired
         private TransferenciaRepositoy transferenciaRepositoy;
 
-        public Page<Transferencia> findAllTransferenciaByContaId(Pageable pageable, Integer conta_id,
-                        String nome_operador_transacao, String data_inicio, String data_fim) {
-                boolean temPeriodo = data_inicio != null && data_fim != null;
+        public Page<Transferencia> findAllTransferenciaByContaId(Pageable pageable, Integer contaId,
+                        String nomeOperadorTransacao, String dataInicio, String dataFim) {
+                boolean temPeriodo = dataInicio != null && dataFim != null;
 
                 return transferenciaRepositoy
                                 .findAllTransferenciaByContaId(
-                                                conta_id, nome_operador_transacao,
-                                                temPeriodo ? LocalDateTime.parse(data_inicio) : null,
-                                                temPeriodo ? LocalDateTime.parse(data_fim) : null,
+                                                contaId, nomeOperadorTransacao,
+                                                temPeriodo ? LocalDateTime.parse(dataInicio) : null,
+                                                temPeriodo ? LocalDateTime.parse(dataFim) : null,
                                                 pageable);
         }
 

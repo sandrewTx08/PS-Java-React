@@ -18,18 +18,18 @@ public class TransferenciaController {
         @GetMapping("{conta_id}")
         public TransferenciaDTO findAllTransferenciaByContaId(
                         Pageable pageable,
-                        @RequestParam(name = "data_inicio", required = false) String data_inicio,
-                        @RequestParam(name = "data_fim", required = false) String data_fim,
-                        @RequestParam(name = "nome_operador_transacao", required = false) String nome_operador_transacao,
-                        @PathVariable Integer conta_id) {
+                        @RequestParam(name = "dataInicio", required = false) String dataInicio,
+                        @RequestParam(name = "dataFim", required = false) String dataFim,
+                        @RequestParam(name = "nomeOperadorTransacao", required = false) String nomeOperadorTransacao,
+                        @PathVariable Integer contaId) {
                 Page<Transferencia> transferencia = transferenciaService
-                                .findAllTransferenciaByContaId(pageable, conta_id, nome_operador_transacao, data_inicio,
-                                                data_fim);
+                                .findAllTransferenciaByContaId(pageable, contaId, nomeOperadorTransacao, dataInicio,
+                                                dataFim);
 
                 return new TransferenciaDTO(
                                 transferencia.getTotalPages(),
-                                transferenciaService.saldoTotalByContaId(conta_id),
-                                transferenciaService.saldoTotalByContaIdAndPeriodo(conta_id, data_inicio, data_inicio),
+                                transferenciaService.saldoTotalByContaId(contaId),
+                                transferenciaService.saldoTotalByContaIdAndPeriodo(contaId, dataInicio, dataInicio),
                                 transferencia.getContent());
         }
 }

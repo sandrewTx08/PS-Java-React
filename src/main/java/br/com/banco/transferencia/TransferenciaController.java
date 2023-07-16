@@ -22,9 +22,9 @@ public class TransferenciaController {
         @GetMapping("{contaId}")
         public TransferenciaDTO findAllTransferenciaByContaId(
                         Pageable pageable,
-                        @RequestParam(name = "dataInicio", required = false) @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime dataInicio,
-                        @RequestParam(name = "dataFim", required = false) @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime dataFim,
-                        @RequestParam(name = "nomeOperadorTransacao", required = false) String nomeOperadorTransacao,
+                        @RequestParam(required = false) @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime dataInicio,
+                        @RequestParam(required = false) @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime dataFim,
+                        @RequestParam(required = false) String nomeOperadorTransacao,
                         @PathVariable Integer contaId) {
                 Page<Transferencia> transferencia = transferenciaService
                                 .findAllTransferenciaByContaId(pageable, contaId, nomeOperadorTransacao, dataInicio,

@@ -1,5 +1,7 @@
 # Processo Seletivo Java
 
+[![Java CI](https://github.com/sandrewTx08/PS-Java-React/actions/workflows/java.yaml/badge.svg)](https://github.com/sandrewTx08/PS-Java-React/actions/workflows/java.yaml)
+
 ## Descrição 
 
 - Este teste consiste em construir uma camada de serviço, para uma operação muito realizada em bancos, para emissão de extrato bancário.

@@ -13,26 +13,22 @@ public class TransferenciaService {
         private TransferenciaRepositoy transferenciaRepositoy;
 
         public Page<Transferencia> findAllTransferenciaByContaId(Pageable pageable, Integer contaId,
-                        String nomeOperadorTransacao, String dataInicio, String dataFim) {
-                boolean temPeriodo = dataInicio != null && dataFim != null;
-
+                        String nomeOperadorTransacao, LocalDateTime dataInicio, LocalDateTime dataFim) {
                 return transferenciaRepositoy
-                                .findAllTransferenciaByContaId(
-                                                contaId, nomeOperadorTransacao != "" ? nomeOperadorTransacao : null,
-                                                temPeriodo ? LocalDateTime.parse(dataInicio) : null,
-                                                temPeriodo ? LocalDateTime.parse(dataFim) : null,
-                                                pageable);
+                                .findAllTransferenciaByContaId(contaId,
+                                                nomeOperadorTransacao != "" ? nomeOperadorTransacao : null, dataInicio,
+                                                dataFim, pageable);
         }
 
         public BigDecimal saldoTotalByContaId(Integer contaId) {
                 return transferenciaRepositoy.saldoTotalByContaId(contaId);
         }
 
-        public BigDecimal saldoTotalByContaIdAndPeriodo(Integer contaId, String dataInicio, String dataFim) {
-                boolean temPeriodo = dataInicio != null && dataFim != null;
-
-                return transferenciaRepositoy.saldoTotalByContaIdAndPeriodo(contaId,
-                                temPeriodo ? LocalDateTime.parse(dataInicio) : null,
-                                temPeriodo ? LocalDateTime.parse(dataFim) : null);
+        public BigDecimal saldoTotalByContaIdAndPeriodo(Integer contaId, LocalDateTime dataInicio,
+                        LocalDateTime dataFim) {
+                return transferenciaRepositoy.saldoTotalByContaIdAndPeriodo(
+                                contaId,
+                                dataInicio,
+                                dataFim);
         }
 }
